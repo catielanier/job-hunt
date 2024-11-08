@@ -6,3 +6,4 @@ pyjwt
 dnspython
 flask-mongoengine
 python-dateutil
+flask_cors
