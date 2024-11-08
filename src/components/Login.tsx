@@ -14,6 +14,7 @@ const Login: React.FC = () => {
 	return (
 		<div className="login">
 			<h2>Login</h2>
+			{error && <p>{error}</p>}
 			<form
 				onSubmit={(e) => {
 					e.preventDefault();

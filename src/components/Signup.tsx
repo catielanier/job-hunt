@@ -11,6 +11,7 @@ const Signup: React.FC = () => {
 	return (
 		<div className="signup">
 			<h2>Signup</h2>
+			{error && <p>{error}</p>}
 			{success && (
 				<p>
 					<span className="success">Success!</span> Please log in.
