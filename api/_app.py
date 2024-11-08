@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_cors import CORS
 from dotenv import load_dotenv
-from flask_mongoengine_extended import MongoEngine
+from flask_mongoengine import MongoEngine
 import os
 
 # import blueprints
