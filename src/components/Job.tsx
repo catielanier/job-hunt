@@ -20,7 +20,7 @@ const Job: React.FC = () => {
 
 	useEffect(() => {
 		fetchData();
-	}, [id]);
+	}, [id, fetchData]);
 
 	let dt1: Date | null = null;
 	let dt2: Date | null = null;
@@ -106,7 +106,7 @@ const Job: React.FC = () => {
 			<p>
 				<span>Job Posting:</span>{" "}
 				{!job.direct_posting ? (
-					<a href={job.posting_url} target="_blank">
+					<a href={job.posting_url} target="_blank" rel="noopener">
 						Go to Posting
 					</a>
 				) : (

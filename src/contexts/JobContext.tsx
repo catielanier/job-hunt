@@ -63,7 +63,7 @@ const JobContextProvider: React.FC = (props) => {
 		if (user) {
 			fetchData();
 		}
-	}, [user]);
+	}, [user, fetchData]);
 
 	const addJob = (
 		title: string,

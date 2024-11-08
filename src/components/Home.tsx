@@ -27,7 +27,7 @@ const Home: React.FC = () => {
 				<h4>
 					Jobs Applied: {jobCount} | Active Applications: {activeCount} |
 					Positive Responses: {positiveCount} | Rejection Rate:{" "}
-					{rejectionRate === NaN ? "0" : rejectionRate}%
+					{isNaN(rejectionRate) ? "0" : rejectionRate}%
 				</h4>
 				<div className="job-grid-container">
 					<div className="job-grid-row job-grid-header">
