@@ -100,7 +100,7 @@ const Job: React.FC = () => {
 			<p>
 				<span>Job Posting:</span>{" "}
 				{!job.direct_posting ? (
-					<a href={job.posting_url} target="_blank" rel="noopener">
+					<a href={job.posting_url} target="_blank" rel="noreferrer">
 						Go to Posting
 					</a>
 				) : (
