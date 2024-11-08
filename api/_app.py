@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, send_from_directory
 from flask_cors import CORS
 from dotenv import load_dotenv
 from flask_mongoengine import MongoEngine
@@ -35,7 +35,7 @@ app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(job_routes, url_prefix='/api/jobs')
 if not DEBUG:
 	@app.route("/")
-	def serve_svelte_app():
+	def serve_react_app():
 		return send_from_directory('../build', 'index.html')
 
 # start the server
