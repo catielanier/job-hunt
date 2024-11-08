@@ -10,10 +10,11 @@ from _blueprints.job_routes import job_routes
 
 # Loading environmentals
 load_dotenv()
-mongodb_uri = os.getenv('MONGODB_URI')
+MONGODB_URI = os.getenv('MONGODB_URI')
+ENVIRONMENT = os.getenv('ENVIRONMENT')
 
 # TODO: Set to false in production
-DEBUG = True
+DEBUG = ENVIRONMENT != 'prod'
 
 # Creating flask instance for routing
 app = Flask(__name__)
@@ -24,7 +25,7 @@ CORS(app, resources={r'/*': {'origins': '*'}})
 
 # Connecting to MongoDB Atlas
 app.config['MONGODB_SETTINGS'] = {
-    'host': mongodb_uri
+    'host': MONGODB_URI
 }
 db = MongoEngine()
 db.init_app(app)
@@ -32,6 +33,10 @@ db.init_app(app)
 # register routes
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(job_routes, url_prefix='/api/jobs')
+if not DEBUG:
+	@app.route("/")
+	def serve_svelte_app():
+		return send_from_directory('../build', 'index.html')
 
 # start the server
 if __name__ == '__main__':
