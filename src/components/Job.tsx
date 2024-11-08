@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, {useState, useEffect, useContext, useCallback} from "react";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
 import { JobContext } from "../contexts/JobContext";
@@ -12,15 +12,15 @@ const Job: React.FC = () => {
 	const [success, setSuccess] = useState(false);
 	const { fetchData: fetchGlobalData } = useContext(JobContext);
 
-	const fetchData = () => {
+	const fetchData = useCallback((): void => {
 		axios.get(`/api/jobs/job/${id}`).then((res: any) => {
 			setJob(res.data.data);
 		});
-	};
+	}, [id]);
 
 	useEffect(() => {
 		fetchData();
-	}, [id, fetchData]);
+	}, [fetchData]);
 
 	let dt1: Date | null = null;
 	let dt2: Date | null = null;
@@ -30,16 +30,10 @@ const Job: React.FC = () => {
 	if (job.date_applied !== undefined) {
 		dt2 = new Date(job.date_applied.$date);
 	}
-	let datePosted: string = "";
-	let dateApplied: string = "";
-	if (dt1) {
-		datePosted = dt1.toLocaleString("en-us");
-	}
-	if (dt2) {
-		dateApplied = dt2.toLocaleString("en-us");
-	}
-	const datePostedArr: Array<string> | null = datePosted.split(",") || null;
-	const dateAppliedArr: Array<string> = dateApplied.split(",");
+	const datePosted = dt1 ? dt1.toLocaleString("en-us") : "";
+	const dateApplied = dt2 ? dt2.toLocaleString("en-us") : "";
+	const datePostedArr = datePosted ? datePosted.split(",") : null;
+	const dateAppliedArr = dateApplied.split(",");
 
 	if (success) {
 		return <Redirect to="/" />;
@@ -98,10 +92,10 @@ const Job: React.FC = () => {
 				{job.title} @ {job.company}
 			</h2>
 			<p>
-				<span>Date Posted:</span> {dt1 && datePostedArr[0]}
+				<span>Date Posted:</span> {dt1 && datePostedArr![0]}
 			</p>
 			<p>
-				<span>Date Applied:</span> {dateAppliedArr[0]}
+				<span>Date Applied:</span> {dt2 && dateAppliedArr[0]}
 			</p>
 			<p>
 				<span>Job Posting:</span>{" "}

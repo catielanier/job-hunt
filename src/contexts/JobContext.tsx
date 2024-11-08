@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, {createContext, useContext, useState, useEffect, useCallback} from "react";
 import axios from "axios";
 import { UserContext } from "./UserContext";
 
@@ -49,21 +49,21 @@ const JobContextProvider: React.FC = (props) => {
 	const [jobs, setJobs] = useState([]);
 	const { user } = useContext(UserContext);
 
-	const fetchData = (): void => {
-		axios.get(`/api/jobs/${user}`).then((res: any) => {
-			const jobs: any = res.data.data.sort((x: any, y: any) => {
-				return x.date_applied.$date - y.date_applied.$date;
+	const fetchData = useCallback((): void => {
+		if (user) {
+			axios.get(`/api/jobs/${user}`).then((res: any) => {
+				const jobs: any = res.data.data.sort((x: any, y: any) => {
+					return x.date_applied.$date - y.date_applied.$date;
+				});
+				setJobs(jobs);
+				setSuccess(false);
 			});
-			setJobs(jobs);
-			setSuccess(false);
-		});
-	};
+		}
+	}, [user]);
 
 	useEffect((): void => {
-		if (user) {
 			fetchData();
-		}
-	}, [user, fetchData]);
+	}, [fetchData]);
 
 	const addJob = (
 		title: string,
