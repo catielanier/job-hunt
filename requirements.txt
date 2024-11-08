@@ -1,8 +1,8 @@
-mongoengine==0.27.0
-Flask==2.2.5
-bcrypt==4.0.1
-python-dotenv==1.0.0
-pyjwt==2.7.0
-dnspython==2.3.0
-flask-mongoengine==1.1.0
-python-dateutil==2.8.2
+mongoengine
+Flask
+bcrypt
+python-dotenv
+pyjwt
+dnspython
+flask-mongoengine
+python-dateutil
