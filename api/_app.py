@@ -12,6 +12,8 @@ from _blueprints.job_routes import job_routes
 load_dotenv()
 MONGODB_URI = os.getenv('MONGODB_URI')
 ENVIRONMENT = os.getenv('ENVIRONMENT')
+PORT = os.getenv('PORT')
+HOST = os.getenv('HOST')
 
 # TODO: Set to false in production
 DEBUG = ENVIRONMENT != 'prod'
@@ -40,4 +42,4 @@ if not DEBUG:
 
 # start the server
 if __name__ == '__main__':
-    app.run()
+    app.run(host=HOST, port=PORT, debug=DEBUG)
