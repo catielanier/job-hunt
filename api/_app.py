@@ -36,9 +36,16 @@ db.init_app(app)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(job_routes, url_prefix='/api/jobs')
 if not DEBUG:
-	@app.route("/")
-	def serve_react_app(filename):
-		return send_from_directory('../build', filename)
+	build_dir = os.path.join(os.path.dirname(__file__), "../build")
+	@app.route("/", defaults={"path": ""})
+	@app.route("/<path:path>")
+	def serve_react(path):
+		# Serve the index.html for the root or any unknown path
+		if path == "" or not os.path.exists(os.path.join(build_dir, path)):
+			return send_from_directory(build_dir, "index.html")
+		else:
+			# Serve static files (JS, CSS, images) if they exist
+			return send_from_directory(build_dir, path)
 
 # start the server
 if __name__ == '__main__':
