@@ -37,8 +37,8 @@ app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(job_routes, url_prefix='/api/jobs')
 if not DEBUG:
 	@app.route("/")
-	def serve_react_app():
-		return send_from_directory('../build', 'index.html')
+	def serve_react_app(filename):
+		return send_from_directory('../build', filename)
 
 # start the server
 if __name__ == '__main__':
