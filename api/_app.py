@@ -36,14 +36,13 @@ db.init_app(app)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(job_routes, url_prefix='/api/jobs')
 if not DEBUG:
-	build_dir = os.path.join(os.path.dirname(__file__), "../build")
 	@app.route("/", defaults={"path": ""})
 	@app.route("/<path:path>")
 	def serve_react(path):
-		if path != "" and os.path.exists(app.static_folder + '/' + path):
-			return send_from_directory(app.static_folder, path)
+		if path != "" and os.path.exists("../build" + '/' + path):
+			return send_from_directory("../build", path)
 		else:
-			return send_from_directory(app.static_folder, 'index.html')
+			return send_from_directory("../build", 'index.html')
 
 # start the server
 if __name__ == '__main__':
