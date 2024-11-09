@@ -44,11 +44,11 @@ if not DEBUG:
 		if path == "" or not os.path.exists(os.path.join(build_dir, path)):
 			return send_from_directory(build_dir, "index.html")
 		else:
-		# Check if the request path includes 'static/' to match React's structure
-		if path.startswith("static/"):
-			return send_from_directory(os.path.join(build_dir, "static"), path[len("static/"):])
-		# Serve other files directly from the build directory
-		return send_from_directory(build_dir, path)
+			# Check if the request path includes 'static/' to match React's structure
+			if path.startswith("static/"):
+				return send_from_directory(os.path.join(build_dir, "static"), path[len("static/"):])
+			# Serve other files directly from the build directory
+			return send_from_directory(build_dir, path)
 
 # start the server
 if __name__ == '__main__':
