@@ -36,7 +36,7 @@ db.init_app(app)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(job_routes, url_prefix='/api/jobs')
 if not DEBUG:
-	@app.route("/", defaults={"path": ""})
+	@app.route("/")
 	def serve_react_build():
 		return render_template('index.html')
 
