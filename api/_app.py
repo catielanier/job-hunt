@@ -1,4 +1,4 @@
-from flask import Flask, send_from_directory
+from flask import Flask, render_template
 from flask_cors import CORS
 from dotenv import load_dotenv
 from flask_mongoengine import MongoEngine
@@ -19,7 +19,7 @@ HOST = os.getenv('HOST')
 DEBUG = ENVIRONMENT != 'prod'
 
 # Creating flask instance for routing
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='', static_folder='../build', template_folder='../build')
 app.config.from_object(__name__)
 
 # setting up cors
@@ -37,12 +37,8 @@ app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(job_routes, url_prefix='/api/jobs')
 if not DEBUG:
 	@app.route("/", defaults={"path": ""})
-	@app.route("/<path:path>")
-	def serve_react(path):
-		if path != "" and os.path.exists("../build" + '/' + path):
-			return send_from_directory("../build/", path)
-		else:
-			return send_from_directory("../build", 'index.html')
+	def serve_react_build():
+		return render_template('index.html')
 
 # start the server
 if __name__ == '__main__':
