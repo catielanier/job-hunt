@@ -40,7 +40,7 @@ if not DEBUG:
 	@app.route("/<path:path>")
 	def serve_react(path):
 		if path != "" and os.path.exists("../build" + '/' + path):
-			return send_from_directory("../build", path)
+			return send_from_directory("../build/", path)
 		else:
 			return send_from_directory("../build", 'index.html')
 
