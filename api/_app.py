@@ -40,15 +40,10 @@ if not DEBUG:
 	@app.route("/", defaults={"path": ""})
 	@app.route("/<path:path>")
 	def serve_react(path):
-		# Serve the index.html for the root or any unknown path
-		if path == "" or not os.path.exists(os.path.join(build_dir, path)):
-			return send_from_directory(build_dir, "index.html")
+		if path != "" and os.path.exists(app.static_folder + '/' + path):
+			return send_from_directory(app.static_folder, path)
 		else:
-			# Check if the request path includes 'static/' to match React's structure
-			if path.startswith("static/"):
-				return send_from_directory(os.path.join(build_dir, "static"), path[len("static/"):])
-			# Serve other files directly from the build directory
-			return send_from_directory(build_dir, path)
+			return send_from_directory(app.static_folder, 'index.html')
 
 # start the server
 if __name__ == '__main__':
