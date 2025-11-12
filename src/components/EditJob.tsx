@@ -30,6 +30,7 @@ const EditJob = (props: IEditProps) => {
 		"Scam",
 		"Ghosted",
 		"Offer Received",
+		"Offer Rescinded",
 	];
 	const [datePosted, setDatePosted] = useState(props.datePosted);
 	const [dateApplied, setDateApplied] = useState(props.dateApplied);
