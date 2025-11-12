@@ -198,6 +198,10 @@ nav ul:last-child {
 	background: #fae4cc;
 }
 
+.offer-received {
+	background: #c9daf8;
+}
+
 .modal {
 	width: 30%;
 	position: absolute;

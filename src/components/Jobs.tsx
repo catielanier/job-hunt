@@ -26,7 +26,7 @@ const Jobs = (props: IJobProps) => {
 	const dateAppliedArr: Array<string> = dateApplied.split(",");
 	const { status } = props.job;
 	return (
-		<div className={`job-grid-row ${status.toLowerCase()}`}>
+		<div className={`job-grid-row ${status.toLowerCase().replace(" ", "-")}`}>
 			<div>{props.job.title}</div>
 			<div>{props.job.company}</div>
 			<div>{dt1 ? datePostedArr[0] : null}</div>

@@ -16,7 +16,7 @@ secret = os.getenv('SECRET')
 job_routes = Blueprint('job_routes', __name__)
 
 # create enum for job status
-JOB_STATUS = ('Active', 'Positive', 'Rejected', 'Failed', 'Ghosted', 'Scam')
+JOB_STATUS = ('Active', 'Positive', 'Rejected', 'Failed', 'Ghosted', 'Scam', "Offer Received")
 
 
 # create user model
