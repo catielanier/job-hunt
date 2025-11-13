@@ -10,10 +10,10 @@ const Home: React.FC = () => {
 	let positiveCount: number = 0;
 	const jobCount: number = jobs.length;
 	jobs.forEach((job) => {
-		if (job.status === "Active" || job.status === "Positive") {
+		if (job.status === "Active" || job.status === "Positive" || job.status === "Offer Received") {
 			activeCount += 1;
 		}
-		if (job.status === "Positive") {
+		if (job.status === "Positive" || job.status === "Offer Received") {
 			positiveCount += 1;
 		}
 	});
